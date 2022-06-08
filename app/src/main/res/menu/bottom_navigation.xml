@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/ic_maps"
+            android:title="@string/maps" />
+
+        <item
+            android:id="@+id/nav_Fav"
+            android:icon="@drawable/ic_fav"
+            android:title="@string/fav" />
+
+        <item
+            android:id="@+id/nav_formSQLite"
+            android:icon="@drawable/ic_sqlite"
+            android:title="@string/SQLite" />
+
+        <item
+            android:id="@+id/nav_listSQLite"
+            android:icon="@drawable/ic_list"
+            android:title="@string/SQLite" />
+</menu>
