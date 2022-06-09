@@ -2,9 +2,9 @@ package com.example.recuperaciom8.SQLite.Model;
 
 public class Ubicacio {
 
-    String ciutat;
-    String temps;
-    String temperatura;
+    public String ciutat;
+    public String temps;
+    public String temperatura;
 
     public Ubicacio() {
 

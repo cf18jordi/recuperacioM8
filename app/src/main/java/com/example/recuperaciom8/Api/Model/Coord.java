@@ -1,8 +1,13 @@
 package com.example.recuperaciom8.Api.Model;
 
+import java.util.ArrayList;
+
 public class Coord {
-    public Coord() {
         Double lon;
-        Double lan;
-    }
+        Double lat;
+
+        public Double getLon() { return lon; }
+        public Double getLat() { return lat; }
+
+
 }

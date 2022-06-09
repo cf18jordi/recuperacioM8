@@ -1,4 +1,4 @@
-package com.example.recuperaciom8.Fragments;
+/*package com.example.recuperaciom8.Fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -51,7 +51,7 @@ public class FragmentMaps extends Fragment implements GoogleMap.OnMyLocationButt
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
 
-        /**
+        */ /*
          * Manipulates the map once available.
          * This callback is triggered when the map is ready to be used.
          * This is where we can add markers or lines, add listeners or move the camera.
@@ -59,7 +59,7 @@ public class FragmentMaps extends Fragment implements GoogleMap.OnMyLocationButt
          * If Google Play services is not installed on the device, the user will be prompted to
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
-         */
+         *//*
 
 
 
@@ -113,4 +113,4 @@ public class FragmentMaps extends Fragment implements GoogleMap.OnMyLocationButt
 
 
 
-}
+}*/

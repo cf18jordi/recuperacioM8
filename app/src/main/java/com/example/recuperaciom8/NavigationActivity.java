@@ -11,7 +11,7 @@ import com.example.recuperaciom8.Fragments.FragmentFav;
 import com.example.recuperaciom8.Fragments.FragmentFormSQLite;
 import com.example.recuperaciom8.Fragments.FragmentHome;
 import com.example.recuperaciom8.Fragments.FragmentListSQLite;
-import com.example.recuperaciom8.Fragments.FragmentMaps;
+import com.example.recuperaciom8.Fragments.MapsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class NavigationActivity extends AppCompatActivity {
@@ -37,7 +37,7 @@ public class NavigationActivity extends AppCompatActivity {
                     break;
 
                 case R.id.nav_maps:
-                    selectedFragment = new FragmentMaps();
+                    selectedFragment = new MapsFragment();
                     break;
 
                 case R.id.nav_Fav:

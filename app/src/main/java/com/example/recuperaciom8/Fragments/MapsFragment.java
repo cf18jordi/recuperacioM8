@@ -1,16 +1,29 @@
 package com.example.recuperaciom8.Fragments;
 
+import static com.example.recuperaciom8.Api.DefaultConstants.*;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.example.recuperaciom8.Api.Interfice.ApiCall;
+import com.example.recuperaciom8.Api.Model.ModelApi;
 import com.example.recuperaciom8.R;
+import com.example.recuperaciom8.SQLite.Model.Ubicacio;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -18,7 +31,22 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MapsFragment extends Fragment {
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean permissionDenied = false;
+    private GoogleMap map;
+    Editable citySearch;
+    EditText searchText;
+    RecyclerView recyclerView;
+    TextView textView;
+    public String api = "835babac7f4d7e37f8f51a1abac4fe63";
 
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
@@ -46,23 +74,47 @@ public class MapsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
 
-        View view = inflater.inflate(R.layout.fragment_maps2, container, false);
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        Button searchButton = view.findViewById(R.id.searchButton);
+        searchText  = view.findViewById(R.id.searchText);
+        textView = view.findViewById(R.id.textResults);
+
+        ImageButton searchButton = view.findViewById(R.id.searchButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
-            onSearchButtonClick();
-        });
+            @Override
+            public void onClick(View view) {
+                String query = searchText.getText().toString();
+                Log.i("asd", query);
+                if (!query.equals("")) {
 
+                    ApiCall apiCall = retrofit.create(ApiCall.class);
+                    Call<ModelApi> call = apiCall.getData(query, API_KEY);
+
+                    call.enqueue(new Callback<ModelApi>() {
+                        @Override
+                        public void onResponse(Call<ModelApi> call, Response<ModelApi> response) {
+                            if (response.code() != 200) {
+                                Log.i("testApi", "checkConnection");
+                                return;
+                            } else {
+                                Log.i("testApi", response.body().getName());
+                                Log.i("testApi", response.body().getWeather().get(0).getMain());
+                                Log.i("testApi", response.body().getWeather().get(0).getDescription());
+                                textView.setText("Ciutat: " + response.body().getName()
+                                            + "--- Temps: " + response.body().getWeather().get(0).getMain()
+                                            + "--- Descripció: " + response.body().getWeather().get(0).getDescription());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ModelApi> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
         return view;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(callback);
-        }
-    }
 }
